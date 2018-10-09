@@ -7,11 +7,9 @@ package geometry;
  */
 public class GeometricCalculatorImpl implements GeometricCalculator {
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
     public double area(ShapeType shape, double[] parameters) {
-        double area = 0.0;
+        double area;
 
         if (shape == null) {
             throw new IllegalArgumentException();
@@ -42,11 +40,9 @@ public class GeometricCalculatorImpl implements GeometricCalculator {
         return area;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
     public double circumference(ShapeType shape, double[] parameters) {
-        double circumference = 0.0;
+        double circumference;
 
         if (shape == null) {
             throw new IllegalArgumentException();
