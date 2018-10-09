@@ -21,7 +21,5 @@ Programming exercises for interviews.
 * [Geometric Calculator - Improve code for calculating the area and circumference of geometric shapes](scienta-geometric-calculator/README.md)
 * [Crossword - Implement an existing API for defining and solving crosswords](scienta-crossword/README.md)
 
-TODO: Remove solution
-
 ## License
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
