@@ -18,6 +18,7 @@ Programming exercises for interviews.
 
 * [Laser Control - Improve the laser beam controller software](scienta-laser-control/README.md)
 * [Geometric Calculator - Improve code for calculating the area and circumference of geometric shapes](scienta-geometric-calculator/README.md)
+* [Crossword - Implement an existing API for defining and solving crosswords](scienta-crossword/README.md)
 
 TODO: Remove solution
 

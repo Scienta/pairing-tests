@@ -1,4 +1,4 @@
-#Geometric Calculator
+# Geometric Calculator
 
 In this exercise you are going to improve existing code without changing its behaviour or adding new
 functionality.
