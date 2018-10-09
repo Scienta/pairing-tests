@@ -29,6 +29,7 @@ public class CrosswordImpl implements Crossword {
      *
      * @return The number of rows.
      */
+    @Override
     public int getRowCount() {
         // TODO: Implement
         return 0;
@@ -39,6 +40,7 @@ public class CrosswordImpl implements Crossword {
      *
      * @return The number of columns.
      */
+    @Override
     public int getColumnCount() {
         // TODO: Implement
         return 0;
@@ -52,6 +54,7 @@ public class CrosswordImpl implements Crossword {
      * @return The square at the given coordinates, or <code>null</code> if the row
      *         and/or column is not within the crossword.
      */
+    @Override
     public Square getSquare(int row, int column) {
         // TODO: Implement
         return null;
@@ -69,6 +72,7 @@ public class CrosswordImpl implements Crossword {
      * @param writable Whether the square should be writable or not.
      * @throws IllegalArgumentException If there is no square at the given coordinates.
      */
+    @Override
     public void setSquareWritable(int row, int column, boolean writable) throws IllegalArgumentException {
         // TODO: Implement
     }
@@ -83,6 +87,7 @@ public class CrosswordImpl implements Crossword {
      * @throws IllegalArgumentException If there is no square at the given
      *                                  coordinates, or if the square is not writable.
      */
+    @Override
     public void setSquareCharacter(int row, int column, Character character) throws IllegalArgumentException {
         // TODO: Implement
     }
@@ -95,6 +100,7 @@ public class CrosswordImpl implements Crossword {
      *         can be freely modified without modifying the underlying data.
      * @throws IllegalArgumentException If there is no row with the given number.
      */
+    @Override
     public List<Square> getRow(int row) throws IllegalArgumentException {
         // TODO: Implement
         return null;
@@ -108,6 +114,7 @@ public class CrosswordImpl implements Crossword {
      *         can be freely modified without modifying the underlying data.
      * @throws IllegalArgumentException If there is no column with the given number.
      */
+    @Override
     public List<Square> getColumn(int column) throws IllegalArgumentException {
         // TODO: Implement
         return null;
@@ -123,6 +130,7 @@ public class CrosswordImpl implements Crossword {
      *
      * @return A square iterator.
      */
+    @Override
     public Iterator<Square> iterator() {
         // TODO: Implement
         return null;
@@ -134,6 +142,7 @@ public class CrosswordImpl implements Crossword {
      *
      * @return The highest clue index generated, or zero if no clues were generated.
      */
+    @Override
     public int generateClueIndices() {
         // TODO: Implement
         return 0;
@@ -146,6 +155,7 @@ public class CrosswordImpl implements Crossword {
      * @return The square with the given clue index, or <code>null</code> if no square
      *         has the given index, or if square indices have not been generated yet.
      */
+    @Override
     public Square getSquare(int clueIndex) {
         // TODO: Implement
         return null;
@@ -162,6 +172,7 @@ public class CrosswordImpl implements Crossword {
      * @throws IllegalArgumentException If the given clue index and direction does
      *                                  not identify a valid clue/answer.
      */
+    @Override
     public List<Character> getAnswer(int clueIndex, Direction direction) throws IllegalArgumentException {
         // TODO: Implement
         return null;
@@ -178,6 +189,7 @@ public class CrosswordImpl implements Crossword {
      *                                  not identify a valid clue/answer, or if the given answer
      *                                  word has wrong length.
      */
+    @Override
     public void setAnswer(int clueIndex, Direction direction, String answer) throws IllegalArgumentException {
         // TODO: Implement
     }
@@ -194,6 +206,7 @@ public class CrosswordImpl implements Crossword {
      * @throws IllegalArgumentException If the given clue index and direction does
      *                                  not identify a valid clue/answer.
      */
+    @Override
     public boolean isAnswerValid(int clueIndex, Direction direction, String answer) throws IllegalArgumentException {
         // TODO: Implement
         return false;

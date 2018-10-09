@@ -1,25 +1,26 @@
 package crossword;
 
-import junit.framework.TestCase;
-
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.junit.Assert.*;
+
 /**
- * Unit test of {@link Crossword}, to be used for automated assessment
- * of code quality.
+ * Unit test of {@link Crossword}.
  *
  * @author Sindre Mehus
  */
-public class CrosswordTestCase extends TestCase {
+public class CrosswordTest {
 
     private CrosswordFactory factory;
     private Crossword testCrossword;
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
+    @Before
+    public void before() {
         factory = new CrosswordFactory();
 
         int[][] crosswordDefinition = {
@@ -36,6 +37,7 @@ public class CrosswordTestCase extends TestCase {
     /**
      * Verify that the factory creates new instances every time.
      */
+    @Test
     public void testFactoryCreatesNewInstance() {
         Crossword c1 = factory.createCrossword(2, 2);
         Crossword c2 = factory.createCrossword(2, 2);
@@ -50,6 +52,7 @@ public class CrosswordTestCase extends TestCase {
      * Verify that IllegalArgumentException is thrown if specifying
      * negative row and/or column count.
      */
+    @Test
     public void testIllegalSize() {
         try {
             factory.createCrossword(-1, 10);
@@ -73,6 +76,7 @@ public class CrosswordTestCase extends TestCase {
     /**
      * Verify that crosswords have the correct dimensions.
      */
+    @Test
     public void testDimensions() {
         for (int i = 1; i < 8; i++) {
             for (int j = 1; j < 8; j++) {
@@ -86,6 +90,7 @@ public class CrosswordTestCase extends TestCase {
     /**
      * Verify that zero rows and/or columns works.
      */
+    @Test
     public void testZeroRowsOrColumns() {
         Crossword c = factory.createCrossword(0, 0);
         assertEquals("Wrong number of rows.", 0, c.getRowCount());
@@ -103,6 +108,7 @@ public class CrosswordTestCase extends TestCase {
     /**
      * Verify that squares are initially empty and writable.
      */
+    @Test
     public void testInitialSquareState() {
         Crossword c = factory.createCrossword(4, 5);
         for (int i = 0; i < c.getRowCount(); i++) {
@@ -118,6 +124,7 @@ public class CrosswordTestCase extends TestCase {
     /**
      * Verify that getSquare() returns null when row and column are outside the crossword.
      */
+    @Test
     public void testGetNonExistentSquare() {
         Crossword c = factory.createCrossword(2, 10);
         assertNull("Error in getSquare().", c.getSquare(-1, -1));
@@ -132,6 +139,7 @@ public class CrosswordTestCase extends TestCase {
     /**
      * Verify that setting and getting of characters work.
      */
+    @Test
     public void testSetSquareCharacter() {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
@@ -144,6 +152,7 @@ public class CrosswordTestCase extends TestCase {
     /**
      * Negative tests of setSquareCharacter().
      */
+    @Test
     public void testSetSquareCharacterNegative() {
 
         Crossword c = factory.createCrossword(2, 3);
@@ -208,6 +217,7 @@ public class CrosswordTestCase extends TestCase {
     /**
      * Verify that setSquareWritable() works.
      */
+    @Test
     public void testSetSquareWritable() {
         Crossword c = factory.createCrossword(2, 3);
 
@@ -221,6 +231,7 @@ public class CrosswordTestCase extends TestCase {
     /**
      * Negative tests of setSquareWritable().
      */
+    @Test
     public void testSetSquareWritableNegative() {
         Crossword c = factory.createCrossword(2, 3);
 
@@ -252,6 +263,7 @@ public class CrosswordTestCase extends TestCase {
     /**
      * Verify that getRow() works.
      */
+    @Test
     public void testGetRow() {
         Crossword c = factory.createCrossword(2, 3);
 
@@ -271,6 +283,7 @@ public class CrosswordTestCase extends TestCase {
     /**
      * Negative tests of getRow().
      */
+    @Test
     public void testGetRowNegative() {
         Crossword c = factory.createCrossword(2, 3);
 
@@ -290,6 +303,7 @@ public class CrosswordTestCase extends TestCase {
     /**
      * Verify that getRow() works with zero columns.
      */
+    @Test
     public void testGetRowZeroColumns() {
         Crossword c = factory.createCrossword(2, 0);
         assertTrue("Error in getRow().", c.getRow(0).isEmpty());
@@ -299,6 +313,7 @@ public class CrosswordTestCase extends TestCase {
     /**
      * Verify that getRow() works if you modify the returned list.
      */
+    @Test
     public void testGetRowModify() {
         Crossword c = factory.createCrossword(2, 3);
 
@@ -319,6 +334,7 @@ public class CrosswordTestCase extends TestCase {
     /**
      * Verify that getColumn() works.
      */
+    @Test
     public void testGetColumn() {
         Crossword c = factory.createCrossword(2, 3);
 
@@ -341,6 +357,7 @@ public class CrosswordTestCase extends TestCase {
     /**
      * Negative tests of getColumn().
      */
+    @Test
     public void testGetColumnNegative() {
         Crossword c = factory.createCrossword(2, 3);
 
@@ -360,6 +377,7 @@ public class CrosswordTestCase extends TestCase {
     /**
      * Verify that getColumn() works with zero rows.
      */
+    @Test
     public void testGetColumnZeroRows() {
         Crossword c = factory.createCrossword(0, 2);
         assertTrue("Error in getColumn().", c.getColumn(0).isEmpty());
@@ -369,6 +387,7 @@ public class CrosswordTestCase extends TestCase {
     /**
      * Verify that getColumn() works if you modify the returned list.
      */
+    @Test
     public void testGetColumnModify() {
         Crossword c = factory.createCrossword(2, 3);
 
@@ -387,6 +406,7 @@ public class CrosswordTestCase extends TestCase {
     /**
      * Verify that iterator() works.
      */
+    @Test
     public void testIterator() {
         Crossword c = factory.createCrossword(2, 2);
         Iterator<Square> iterator = c.iterator();
@@ -414,6 +434,7 @@ public class CrosswordTestCase extends TestCase {
     /**
      * Verify that iterator doesn't implement remove().
      */
+    @Test
     public void testIteratorRemove() {
         Crossword c = factory.createCrossword(2, 2);
         Iterator<Square> iterator = c.iterator();
@@ -429,6 +450,7 @@ public class CrosswordTestCase extends TestCase {
     /**
      * Verify that generateClueIndices() works with the given crossword.
      */
+    @Test
     public void testGenerateClueIndices1() {
         int[][] crossword = {
                 {1, 2},
@@ -440,6 +462,7 @@ public class CrosswordTestCase extends TestCase {
     /**
      * Verify that generateClueIndices() works with the given crossword.
      */
+    @Test
     public void testGenerateClueIndices2() {
         int[][] crossword = {
                 {-1, 1},
@@ -451,6 +474,7 @@ public class CrosswordTestCase extends TestCase {
     /**
      * Verify that generateClueIndices() works with the given crossword.
      */
+    @Test
     public void testGenerateClueIndices3() {
         int[][] crossword = {
                 {-1, -1},
@@ -462,6 +486,7 @@ public class CrosswordTestCase extends TestCase {
     /**
      * Verify that generateClueIndices() works with the given crossword.
      */
+    @Test
     public void testGenerateClueIndices4() {
         int[][] crossword = {
                 {-1, -1},
@@ -473,6 +498,7 @@ public class CrosswordTestCase extends TestCase {
     /**
      * Verify that generateClueIndices() works with the given crossword.
      */
+    @Test
     public void testGenerateClueIndices5() {
         int[][] crossword = {
                 {-1, -1},
@@ -484,6 +510,7 @@ public class CrosswordTestCase extends TestCase {
     /**
      * Verify that generateClueIndices() works with the given crossword.
      */
+    @Test
     public void testGenerateClueIndices6() {
         int[][] crossword = {
                 {1, 0, 2, -1, -1},
@@ -498,6 +525,7 @@ public class CrosswordTestCase extends TestCase {
     /**
      * Verify that generateClueIndices() works with the given crossword.
      */
+    @Test
     public void testGenerateClueIndices7() {
         int[][] crossword = {
                 {-1, 1, -1, 2, -1, 3, -1, 4},
@@ -514,6 +542,7 @@ public class CrosswordTestCase extends TestCase {
     /**
      * Verify that generateClueIndices() works with the given crossword.
      */
+    @Test
     public void testGenerateClueIndices8() {
         int[][] crossword = {
                 {0}
@@ -524,6 +553,7 @@ public class CrosswordTestCase extends TestCase {
     /**
      * Verify that generateClueIndices() works with the given crossword.
      */
+    @Test
     public void testGenerateClueIndices9() {
         int[][] crossword = {
                 {-1}
@@ -587,6 +617,7 @@ public class CrosswordTestCase extends TestCase {
     /**
      * Test generateClueIndices() when the crossword is empty.
      */
+    @Test
     public void testGenerateClueIndicesEmpty() {
         assertEquals("Error in generateClueIndices().", 0, factory.createCrossword(0, 0).generateClueIndices());
         assertEquals("Error in generateClueIndices().", 0, factory.createCrossword(0, 3).generateClueIndices());
@@ -596,6 +627,7 @@ public class CrosswordTestCase extends TestCase {
     /**
      * Test of getSquare().
      */
+    @Test
     public void testGetSquare() {
         assertNull("Error in getSquare().", testCrossword.getSquare(-1));
         assertNull("Error in getSquare().", testCrossword.getSquare(0));
@@ -610,6 +642,7 @@ public class CrosswordTestCase extends TestCase {
     /**
      * Test of getAnswer().
      */
+    @Test
     public void testGetAnswer() {
 
         doTestAnswer(testCrossword, 3, Direction.ACROSS, "_____");
@@ -648,6 +681,7 @@ public class CrosswordTestCase extends TestCase {
     /**
      * Test of setAnswer().
      */
+    @Test
     public void testSetAnswer() {
         testCrossword.setAnswer(3, Direction.ACROSS, "SOLID");
         doTestAnswer(testCrossword, 3, Direction.ACROSS, "SOLID");
@@ -678,6 +712,7 @@ public class CrosswordTestCase extends TestCase {
     /**
      * Test of isAnswerValid().
      */
+    @Test
     public void testIsAnswerValid() {
         assertTrue("Error in isAnswerValid().", testCrossword.isAnswerValid(3, Direction.ACROSS, "SOLID"));
         assertFalse("Error in isAnswerValid().", testCrossword.isAnswerValid(3, Direction.ACROSS, "SOLI"));
@@ -700,6 +735,7 @@ public class CrosswordTestCase extends TestCase {
     /**
      * Negative test of getAnswer().
      */
+    @Test
     public void testGetAnswerNegative() {
         try {
             testCrossword.getAnswer(0, Direction.ACROSS);
@@ -741,6 +777,7 @@ public class CrosswordTestCase extends TestCase {
     /**
      * Negative test of setAnswer().
      */
+    @Test
     public void testSetAnswerNegative() {
         try {
             testCrossword.setAnswer(0, Direction.ACROSS, "foo");
@@ -782,6 +819,7 @@ public class CrosswordTestCase extends TestCase {
     /**
      * Negative test of isAnswerValid().
      */
+    @Test
     public void testIsAnswerValidNegative() {
         try {
             testCrossword.isAnswerValid(0, Direction.ACROSS, "foo");
@@ -819,5 +857,4 @@ public class CrosswordTestCase extends TestCase {
         } catch (IllegalArgumentException x) {
         }
     }
-
 }
