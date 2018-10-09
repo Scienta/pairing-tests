@@ -7,23 +7,17 @@ package laser;
  */
 public class LaserImpl implements Laser {
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
     public void beamOn() {
         System.out.println("Beam on");
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
     public void beamOff() {
         System.out.println("Beam off");
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
     public void moveTo(int x, int y) {
         System.out.println("Move to (" + x + ", " + y + ")");
     }
