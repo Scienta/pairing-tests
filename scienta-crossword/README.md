@@ -10,7 +10,7 @@ A horizontal or vertical sequence of two or more writable squares contains a *cl
 *answer*. One of the tasks of this exercise is to generate clue indices. A square shall contain a clue
 index if and only if it is the first square in such a sequence.
 
-![Example][crossword.png]
+![Example](crossword.png)
 
 The Java interface for a crossword is already defined and should not be modified (see Crossword.java).
 Your job is to implement this interface. A skeleton implementation is provided in CrosswordImpl.java.
