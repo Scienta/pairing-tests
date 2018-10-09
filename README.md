@@ -1,2 +1,2 @@
 # pairing-tests
-Programming exercises for interviews
+Programming exercises for interviews.
