@@ -13,6 +13,7 @@ Programming exercises for interviews.
 * [Snack Shack - Scheduling and inventory for a fast food joint](guardian-snack-shack/README.md)
 * [Split The Treasure - Split a chest of valuable gems equally among the treasure hunters](guardian-split-the-treasure/README.md)
 * [Warehouse Robot - Implement the control mechanism for a warehouse robot](guardian-warehouse-robot/README.md)
+* [Yatzy - Implement a Yatzy library](scienta-yatzy/README.md)
 
 #### Exercises with existing code
 
