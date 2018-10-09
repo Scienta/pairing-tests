@@ -1,5 +1,5 @@
 # Pairing tests
-Programming exercises for interviews.
+Programming exercises for recruitment interviews.
 
 
 #### Exercises with no existing code
@@ -20,6 +20,9 @@ Programming exercises for interviews.
 * [Laser Control - Improve the laser beam controller software](scienta-laser-control/README.md)
 * [Geometric Calculator - Improve code for calculating the area and circumference of geometric shapes](scienta-geometric-calculator/README.md)
 * [Crossword - Implement an existing API for defining and solving crosswords](scienta-crossword/README.md)
+
+## Attribution
+Several of the exercises (guardian-*) are written by [Guardian](https://github.com/guardian/pairing-tests).
 
 ## License
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
