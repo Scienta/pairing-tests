@@ -32,17 +32,17 @@ This is unnecessary, and reduces the lifetime of the laser. The output from runn
 Your job is to modify the LaserController class in such a way that consecutive lineTo() operations don't cause the laser to be
 turned off and on. The output from a correctly optimized version of the program is given below:
 
-Move to (10, 10)
-Beam on
-Move to (20, 10)
-Move to (20, 20)
-Move to (10, 20)
-Move to (10, 10)
-Beam off
-Move to (15, 15)
-Beam on
-Move to (20, 20)
-Beam off
-Move to (0, 0)
+* Move to (10, 10)
+* Beam on
+* Move to (20, 10)
+* Move to (20, 20)
+* Move to (10, 20)
+* Move to (10, 10)
+* Beam off
+* Move to (15, 15)
+* Beam on
+* Move to (20, 20)
+* Beam off
+* Move to (0, 0)
 
 Finally, note that you are only allowed to modify the LaserController class.
