@@ -20,35 +20,9 @@ trenger en implementasjon, men vi har også muligheten til å implementere `cont
 @FunctionalInterface
 public interface JsonMatcher {
 
-    @FunctionalInterface
-    interface StructuralMatch {
-
-        default boolean matches() {
-            return unmatched().isEmpty();
-        }
-
-        Map<List<String>, JsonNode> unmatched();
-    }
-
-    default boolean contains(JsonNode part) {
-        return match(part).matches();
-    }
-
-    StructuralMatch match(JsonNode part);
+    boolean contains(JsonNode part);
 }
 ```
-Her er en kompilerbar, men feil implementasjon av `JsonMatcher`:
-```java
-public record DefaultJsonMatcher(JsonNode node) implements JsonMatcher {
-
-    @Override
-    public StructuralMatch match(JsonNode part) {
-        return Collections::emptyMap;
-    }
-}
-```
-Denne returnerer alltid en `StructuralMatch` uten noen avvik, altså vil den svare at
-alle dokumenterer er delmengder.
 
 Med begrepet "delmengde" mener vi at:
 
@@ -119,19 +93,19 @@ grunn.
 (Om løsningen definerer regelen for liste-sammenligning annerledes må noen av testene
 justeres.)
 
-## Løsningsstrategier
+## Utvidelser
 
-### Enkel start
+Mulige utvidelser av dette kan være:
 
-I første runde kan vi implementere `contains`-metoden separat. Den trenger bare svare
-`true`/`false`. Dette vil fikse de fleste av testene.
+### Hva feilet? 
 
-### Full løsning
+I stedet for å returnere en enkel sannhetsverdi, kan vi se for oss at vi
+heller returnerer informasjon om hva forskjellen på dokumentene er. Hvordan
+kan en slik returverdi se ut?
 
-En full løsning implementerer `match`-metoden som returnerer en `Map` med
-alle "veiene" gjennom del-dokumentet som _ikke_ kunne finnes i hoved-dokumentet.
-En "vei" angis som en liste med strenger, f.eks. er `["zot", "answer"]` en vei
-gjennom hoved-dokumentet over.
+### Kan vi parametrisere liste-oppførselen?
 
-`contains`-metoden kan da skrives som sjekk av dette `Map`et.  Om det er
-tomt, har vi en match.
+Hvordan kan vi implementere forskjellige tolkninger av hvordan to lister
+skal sammenlignes?  Kan vi f.eks. lage en variant som sjekker rekkefølge,
+antall forekomster etc.?
+

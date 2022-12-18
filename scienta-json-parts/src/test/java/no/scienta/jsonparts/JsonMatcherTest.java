@@ -1,8 +1,5 @@
 package no.scienta.jsonparts;
 
-import java.util.List;
-import java.util.Map;
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,7 +14,7 @@ class JsonMatcherTest {
 
     @BeforeEach
     void setUp() {
-        matcher = new DefaultJsonMatcher(json(
+        matcher = jsonMatcher(
             """
             {
               "foo": {
@@ -30,9 +27,27 @@ class JsonMatcherTest {
                   ]
                 }
               },
-              "arr2": [ "dip", 5, true ]
+              "arr2": [ "dip", 5, true ],
+              "departments": [
+                {
+                    "tech": {
+                      "employees": [
+                         { "name": "Harry", "salary": 4.5 },
+                         { "name": "Sally", "salary": 5.5 }
+                      ]
+                  }
+                },
+                {
+                    "sales": {
+                      "employees": [
+                        { "name": "Dumb", "salary": 10.5 },
+                        { "name": "Dumber", "salary": 11.5 }
+                      ]
+                    }
+                }
+              ]
             }
-            """));
+            """);
     }
 
     @Test
@@ -202,33 +217,48 @@ class JsonMatcherTest {
     }
 
     @Test
-    void deviatingPathsAreReturned() {
-        assertThat(
-            match("""
-                  {
-                    "foo": {
-                      "bar": 4,
-                      "zot": {
-                      }
-                    },
-                    "arr2": [ true, "ouch" ]
+    void deviatingPathsThroughListsAreReturned() {
+        assertPart(
+            """
+            {
+              "departments": [
+                {
+                  "tech": {
+                    "employees": [
+                       { "name": "Harry" }
+                    ]
                   }
-                  """).unmatched()).containsExactly(
-            Map.entry(
-                List.of("arr2"),
-                json(
-                    """
-                    [ "dip", 5, true ]
-                    """))
-        );
+                }
+              ]
+            }
+            """);
+        assertNotPart(
+            """
+            {
+              "departments": [
+                {
+                  "sales": {
+                    "employees": [
+                       { "name": "Harry" }
+                    ]
+                  }
+                }
+              ]
+            }
+            """);
     }
 
-    private JsonMatcher.StructuralMatch match(String json) {
-        return matcher.match(json(json));
+    @Test
+    void arrayTest() {
+        JsonMatcher jsonMatcher = jsonMatcher(
+            """
+            { "foo": "bar" }
+            """);
+        assertNotPart("[3]");
     }
 
     private void assertNotPart(String content) {
-        assertThat(matcher.contains(json(content))).isFalse();
+        assertNotPart(matcher, content);
     }
 
     private void assertPart(String content) {
@@ -236,6 +266,14 @@ class JsonMatcherTest {
     }
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+
+    private static void assertNotPart(JsonMatcher matcher, String content) {
+        assertThat(matcher.contains(json(content))).isFalse();
+    }
+
+    private static JsonMatcher jsonMatcher(String content) {
+        return new DefaultJsonMatcher(json(content));
+    }
 
     private static JsonNode json(String content) {
         try {
