@@ -4,14 +4,16 @@ Denne oppgaven bruker moderne Java.
 
 Vi har et Java-grensesnitt [JsonMatcher](src/main/java/no/scienta/jsonparts/JsonMatcher.java).
 Implementasjoner skal holde på et hoved-JSON-dokument, og deretter kunne avgjøre om andre
-dokumenter er "delmengder" av dette.  Vi bruker Jackson som JSON-bibliotek.
+dokumenter er "delmengder" av dette.  Vi bruker Jackson som JSON-bibliotek, og jobber på Jacksons
+rekursive `JsonNode`-type, som modellerer et AST for JSON. 
 
 ## Problembeskrivelse
 
 Grensesnittet ser ut som under.  Det er et `@FunctionalInterface`, så det er bare `match`-methoden 
-trenger en implementasjon:
+trenger en implementasjon, men vi har også muligheten til å implementere `contains`:
 
 ```java
+
 public interface JsonMatcher {
 
     @FunctionalInterface

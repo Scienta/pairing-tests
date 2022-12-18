@@ -17,7 +17,7 @@ class JsonMatcherTest {
 
     @BeforeEach
     void setUp() {
-        JsonNode master = tree(
+        matcher = new DefaultJsonMatcher(json(
             """
             {
               "foo": {
@@ -32,8 +32,7 @@ class JsonMatcherTest {
               },
               "arr2": [ "dip", 5, true ]
             }
-            """);
-        matcher = matcher(master);
+            """));
     }
 
     @Test
@@ -200,7 +199,7 @@ class JsonMatcherTest {
                   """).unmatched()).containsExactly(
             Map.entry(
                 List.of("arr2"),
-                tree(
+                json(
                     """
                     [ "dip", 5, true ]
                     """))
@@ -208,28 +207,24 @@ class JsonMatcherTest {
     }
 
     private JsonMatcher.StructuralMatch match(String json) {
-        return matcher.match(tree(json));
+        return matcher.match(json(json));
     }
 
     private void assertNotPart(String content) {
-        assertThat(matcher.contains(tree(content))).isFalse();
+        assertThat(matcher.contains(json(content))).isFalse();
     }
 
     private void assertPart(String content) {
-        assertThat(matcher.contains(tree(content))).isTrue();
+        assertThat(matcher.contains(json(content))).isTrue();
     }
 
-    public static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
-    private static JsonMatcher matcher(JsonNode master) {
-        return new DefaultJsonMatcher(master);
-    }
-
-    private static JsonNode tree(String content) {
+    private static JsonNode json(String content) {
         try {
             return OBJECT_MAPPER.readTree(content);
         } catch (Exception e) {
-            throw new IllegalStateException("Failed to parrse: " + content, e);
+            throw new IllegalStateException("Failed to parse: " + content, e);
         }
     }
 }
