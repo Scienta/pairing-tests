@@ -4,8 +4,10 @@ Denne oppgaven bruker moderne Java.
 
 Vi har et Java-grensesnitt [JsonMatcher](src/main/java/no/scienta/jsonparts/JsonMatcher.java).
 Implementasjoner skal holde på et hoved-JSON-dokument, og deretter kunne avgjøre om andre
-dokumenter er "delmengder" av dette.  Vi bruker Jackson som JSON-bibliotek, og jobber på Jacksons
-rekursive `JsonNode`-type, som modellerer et AST for JSON. 
+dokumenter er "delmengder" av dette.
+
+Vi bruker Jackson som JSON-bibliotek, og jobber på Jacksons rekursive `JsonNode`-type, som modellerer et 
+AST for JSON. 
 
 ## Problembeskrivelse
 
@@ -33,13 +35,22 @@ public interface JsonMatcher {
     StructuralMatch match(JsonNode part);
 }
 ```
+Her er en gyldig, men feil implementasjon av `match`:
+```
+    @Override
+    public StructuralMatch match(JsonNode part) {
+        return Collections::emptyMap;
+    }
+```
+Denne returnerer alltid en `StructuralMatch` uten noen avvik, altså vil den svare at
+alle dokumenterer er delmengder.
 
-Begrepet "delmengde" defineres som sådan: 
+Begrepet "delmengde" defineres slik: 
 
-* Alle løvnoder i delmengden må også finnes i hoved-dokumentet, med samme verdi
-* Alle lister behandles som mengder ("sets"), dvs. at rekkefølge ikke er 
-  av betydning. Med andre ord: En liste X er delmengde av liste Y hvis alle
-  elementer i X også kan finnes i Y.
+* Alle løvnoder i en delmengde må også finnes i hoved-dokumentet, med samme verdi
+* Alle lister behandles som mengder (eng. "sets"), dvs. at rekkefølgen er uten 
+  betydning, og antallet forekomster av en verdi er uten betydning.  Med andre ord: 
+  En liste X er delmengde av liste Y hvis alle elementer i X også kan finnes i Y.
 
 Om vi har dette hoved-dokumentet:
 ```json
@@ -48,7 +59,7 @@ Om vi har dette hoved-dokumentet:
   "zot": {
     "answer": 42
   },
-  "zip": [ 1, 2, 3, 4, 5, 6, 7 ]
+  "zip": [ 1, 6, 7 ]
 }
 ```
 er dette en delmengde:
@@ -63,7 +74,7 @@ og dette:
 ```json
 {
   "foo": "bar", 
-  "zip": [ 6, 1 ]
+  "zip": [ 6, 1, 1, 1, 1 ]
 }
 ```
 men ikke dette:
@@ -108,4 +119,3 @@ gjennom hoved-dokumentet over.
 
 `contains`-metoden blir da redusert til en sjekk av dette `Map`et.  Om det er
 tomt, har vi en match.
-

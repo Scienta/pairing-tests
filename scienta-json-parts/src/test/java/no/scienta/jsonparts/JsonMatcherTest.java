@@ -138,6 +138,23 @@ class JsonMatcherTest {
     }
 
     @Test
+    void isPartIfArrayIsSubsetRegardlessOfArity() {
+        assertPart(
+            """
+            {
+              "foo": {
+                "bar": 4,
+                "zot": {
+                  "zips": [
+                    { "argh": [6, 5, 5, 5, 5]}
+                  ]
+                }
+              }
+            }
+            """);
+    }
+
+    @Test
     void notPartIfArrayHasAdditionalElements() {
         assertNotPart(
             """
