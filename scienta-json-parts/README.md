@@ -36,11 +36,14 @@ public interface JsonMatcher {
 }
 ```
 Her er en gyldig, men feil implementasjon av `match`:
-```
+```java
+public record DefaultJsonMatcher(JsonNode node) implements JsonMatcher {
+
     @Override
     public StructuralMatch match(JsonNode part) {
         return Collections::emptyMap;
     }
+}
 ```
 Denne returnerer alltid en `StructuralMatch` uten noen avvik, altså vil den svare at
 alle dokumenterer er delmengder.
