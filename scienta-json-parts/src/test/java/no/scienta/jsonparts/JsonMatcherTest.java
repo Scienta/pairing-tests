@@ -202,7 +202,7 @@ class JsonMatcherTest {
     }
 
     @Test
-    void deviatingPathsAreRetruned() {
+    void deviatingPathsAreReturned() {
         assertThat(
             match("""
                   {
