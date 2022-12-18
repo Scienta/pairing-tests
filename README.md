@@ -14,13 +14,14 @@ Programming exercises for recruitment interviews.
 * [Split The Treasure - Split a chest of valuable gems equally among the treasure hunters](guardian-split-the-treasure/README.md)
 * [Warehouse Robot - Implement the control mechanism for a warehouse robot](guardian-warehouse-robot/README.md)
 * [Yatzy - Implement a Yatzy library](scienta-yatzy/README.md)
+* [JSON-parts, blank slate - Does JSON-doc X contain all of JSON-doc Y?](scienta-json-parts-carte-blanche/README.md)
 
 #### Exercises with existing code
 
 * [Laser Control - Improve the laser beam controller software](scienta-laser-control/README.md)
 * [Geometric Calculator - Improve code for calculating the area and circumference of geometric shapes](scienta-geometric-calculator/README.md)
 * [Crossword - Implement an existing API for defining and solving crosswords](scienta-crossword/README.md)
-* [JSON-parts - Implement JSON util: Does document A contain all of document B](scienta-json-parts/README.md)
+* [JSON-parts - Does JSON-doc A contain all of JSON-doc B? W/ mvn setup + tests](scienta-json-parts/README.md)
 
 ## Attribution
 Several of the exercises (guardian-*) are written by [Guardian](https://github.com/guardian/pairing-tests).

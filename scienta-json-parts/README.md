@@ -1,17 +1,19 @@
 # JSON-parts
 
-Denne oppgaven bruker moderne Java.
+Denne oppgaven er en variant av [scienta-json-parts-carte-blanche](../scienta-json-parts-carte-blanche/README.md) 
+med ferdig oppsett for en maven-basert løsning i moderne Java (JDK 17).  
+
 
 Vi har et Java-grensesnitt [JsonMatcher](src/main/java/no/scienta/jsonparts/JsonMatcher.java).
 Implementasjoner skal holde på et hoved-JSON-dokument, og deretter kunne avgjøre om andre
 dokumenter er "delmengder" av dette.
 
-Vi bruker Jackson som JSON-bibliotek, og jobber på Jacksons rekursive `JsonNode`-type, som modellerer et 
-AST for JSON. 
+Vi bruker Jackson som JSON-bibliotek, og jobber på Jacksons rekursive `JsonNode`-type, som modellerer et
+AST for JSON.
 
 ## Problembeskrivelse
 
-Grensesnittet ser ut som under.  Det er et `@FunctionalInterface`, så det er bare `match`-methoden 
+Grensesnittet ser ut som under.  Det er et `@FunctionalInterface`, så det er bare `match`-methoden
 trenger en implementasjon, men vi har også muligheten til å implementere `contains`:
 
 ```java
@@ -48,15 +50,18 @@ public record DefaultJsonMatcher(JsonNode node) implements JsonMatcher {
 Denne returnerer alltid en `StructuralMatch` uten noen avvik, altså vil den svare at
 alle dokumenterer er delmengder.
 
-Med begrepet "delmengde" mener vi at: 
+Med begrepet "delmengde" mener vi at:
 
-* Alle løvnoder i en delmengde-JSON må også finnes i hoved-dokumentet, på samme sted 
+* Alle løvnoder i en delmengde-JSON må også finnes i hoved-dokumentet, på samme sted
   og med samme verdi
-* Alle lister behandles som mengder (eng. "sets"), dvs. at rekkefølgen er uten 
-  betydning, og antallet forekomster av en verdi er uten betydning.  Med andre ord: 
+* Alle lister behandles som mengder (eng. "sets"), dvs. at rekkefølgen er uten
+  betydning, og antallet forekomster av en verdi er uten betydning.  Med andre ord:
   En liste X er delmengde av liste Y hvis alle elementer i X også kan finnes i Y.
 
-Om vi har dette hoved-dokumentet:
+Reglene for liste-sammenligninger er ofte drevet av hvilke bruksområder vi har, så det er ikke noe problem om
+løsningen definerer en annen logikk for dette.
+
+Her følger noen eksempler med definisjonen som gitt over. Om vi har dette hoved-dokumentet:
 ```json
 {
   "foo": "bar", 
@@ -109,13 +114,16 @@ eller dette: (Samme løvnode, riktig sted, feil verdi)
 ```
 Vi har testen [JsonMatcherTest](src/test/java/no/scienta/jsonparts/JsonMatcherTest.java)
 som viser flere eksempler.  De fleste av disse feiler, de som passerer gjør det av feil
-grunn. 
+grunn.
+
+(Om løsningen definerer regelen for liste-sammenligning annerledes må noen av testene
+justeres.)
 
 ## Løsningsstrategier
 
 ### Enkel start
 
-I første runde kan vi implementere `contains`-metoden separat. Den trenger bare svare 
+I første runde kan vi implementere `contains`-metoden separat. Den trenger bare svare
 `true`/`false`. Dette vil fikse de fleste av testene.
 
 ### Full løsning
