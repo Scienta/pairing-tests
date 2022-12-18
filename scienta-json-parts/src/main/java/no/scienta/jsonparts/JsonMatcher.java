@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
+@FunctionalInterface
 public interface JsonMatcher {
 
     @FunctionalInterface
@@ -18,7 +19,7 @@ public interface JsonMatcher {
     }
 
     default boolean contains(JsonNode part) {
-        return match(part).unmatched().isEmpty();
+        return match(part).matches();
     }
 
     StructuralMatch match(JsonNode part);

@@ -15,7 +15,7 @@ Grensesnittet ser ut som under.  Det er et `@FunctionalInterface`, så det er ba
 trenger en implementasjon, men vi har også muligheten til å implementere `contains`:
 
 ```java
-
+@FunctionalInterface
 public interface JsonMatcher {
 
     @FunctionalInterface
@@ -29,13 +29,13 @@ public interface JsonMatcher {
     }
 
     default boolean contains(JsonNode part) {
-        return match(part).unmatched().isEmpty();
+        return match(part).matches();
     }
 
     StructuralMatch match(JsonNode part);
 }
 ```
-Her er en gyldig, men feil implementasjon av `match`:
+Her er en kompilerbar, men feil implementasjon av `match`:
 ```java
 public record DefaultJsonMatcher(JsonNode node) implements JsonMatcher {
 
