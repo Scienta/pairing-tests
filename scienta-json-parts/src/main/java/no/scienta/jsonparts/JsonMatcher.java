@@ -17,7 +17,9 @@ public interface JsonMatcher {
         Map<List<String>, JsonNode> unmatched();
     }
 
-    boolean contains(JsonNode part);
+    default boolean contains(JsonNode part) {
+        return match(part).unmatched().isEmpty();
+    }
 
     StructuralMatch match(JsonNode part);
 }

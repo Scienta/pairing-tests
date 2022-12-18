@@ -20,6 +20,7 @@ Programming exercises for recruitment interviews.
 * [Laser Control - Improve the laser beam controller software](scienta-laser-control/README.md)
 * [Geometric Calculator - Improve code for calculating the area and circumference of geometric shapes](scienta-geometric-calculator/README.md)
 * [Crossword - Implement an existing API for defining and solving crosswords](scienta-crossword/README.md)
+* [JSON-parts - Implement JSON util: Does document A contain all of document B](scienta-json-parts/README.md)
 
 ## Attribution
 Several of the exercises (guardian-*) are written by [Guardian](https://github.com/guardian/pairing-tests).
