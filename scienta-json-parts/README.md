@@ -13,8 +13,7 @@ AST for JSON.
 
 ## Problembeskrivelse
 
-Grensesnittet ser ut som under.  Det er et `@FunctionalInterface`, så det er bare `match`-methoden
-trenger en implementasjon, men vi har også muligheten til å implementere `contains`:
+Grensesnittet ser ut som under:
 
 ```java
 @FunctionalInterface
@@ -23,6 +22,8 @@ public interface JsonMatcher {
     boolean contains(JsonNode part);
 }
 ```
+Vi har [en påbegynt implementasjon](src/main/java/no/scienta/jsonparts/DefaultJsonMatcher.java) som kan plukkes opp, og 
+[en hjelpeklasse for å grave i JSON-noder](src/main/java/no/scienta/jsonparts/JsonUtils.java).
 
 Med begrepet "delmengde" mener vi at:
 
@@ -32,7 +33,7 @@ Med begrepet "delmengde" mener vi at:
   betydning, og antallet forekomster av en verdi er uten betydning.  Med andre ord:
   En liste X er delmengde av liste Y hvis alle elementer i X også kan finnes i Y.
 
-Reglene for liste-sammenligninger er ofte drevet av hvilke bruksområder vi har, så det er ikke noe problem om
+Reglene for liste-sammenligninger har mye med bruksområdet å gjøre, så det er ikke noe problem om
 løsningen definerer en annen logikk for dette.
 
 Her følger noen eksempler med definisjonen som gitt over. Om vi har dette hoved-dokumentet:
