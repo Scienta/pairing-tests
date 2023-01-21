@@ -119,6 +119,29 @@ class JsonMatcherTest {
     }
 
     @Test
+    void notPartIfArrayIsActuallyObject() {
+        assertNotPart(
+            """
+            {
+              "foo": {
+                "bar": 4,
+                "zot": {
+                  "zips": [
+                    { "argh": { "foo": 5, "bar": 6 }}
+                  ]
+                }
+              }
+            }
+            """);
+        assertNotPart(
+            """
+            {
+              "arr2": { "itsATrick": true, "reaction": "dip" }
+            }
+            """);
+    }
+
+    @Test
     void isPartIfArrayIsSubset() {
         assertPart(
             """
@@ -250,10 +273,6 @@ class JsonMatcherTest {
 
     @Test
     void arrayTest() {
-        JsonMatcher jsonMatcher = jsonMatcher(
-            """
-            { "foo": "bar" }
-            """);
         assertNotPart("[3]");
     }
 
